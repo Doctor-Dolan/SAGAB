@@ -1,2 +1,2 @@
 # SAGAB
-Assorted codes for analyzing SAGAB data
+Assorted scripts for analyzing SAGAB data
