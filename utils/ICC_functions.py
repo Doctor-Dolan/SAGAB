@@ -6,6 +6,7 @@
 
 import numpy as np
 import pandas as pd
+import nipy
 
 
 def mask_data(data):
@@ -32,6 +33,25 @@ def Add_To_Dataframe(Data, Paradigms, Metrics, ROIS, df, GDT=True):
     return df
 
 
+
+def load_whole_cohort(file_locations):
+    """Given array of file_locations will load into numpy structure in a fashion to compute ICC"""
+    num_subjects = file_locations.shape[0]
+    num_sessions = file_locations.shape[1]
+    concat_image = np.zeros((256,256,150, num_subjects, num_sessions))
+    for i in range(0,num_subjects):
+        for j in range(0,num_sessions):
+
+            print("subject: ", i+1)
+            print("session: ", j+1)
+
+            if os.path.isfile(file_locations[i,j]):
+                concat_image[:,:,:,i,j]=nipy.load_image(file_locations[i,j]).get_data()
+            else:
+                print("sub: ",i, " ses: ", j, " no file")
+                concat_image[:,:,:,i,j]=np.nan
+
+    return concat_image
 
 def load_images(Reg_files, GDT_files):
     #Initialize 5-D array
