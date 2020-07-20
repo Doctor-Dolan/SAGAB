@@ -7,6 +7,7 @@
 import numpy as np
 import pandas as pd
 import nibabel as nib
+import os
 
 
 def mask_data(data):
@@ -45,10 +46,11 @@ def load_whole_cohort(file_locations):
             print("subject: ", i+1)
             print("session: ", j+1)
 
-            if os.path.isfile(file_locations[i,j]):
+            #Equivalence check tests for nan and is safe on string
+            if file_locations[i,j] == file_locations[i,j] and os.path.isfile(file_locations[i,j]):
                 concat_image[:,:,:,i,j]=nib.load(file_locations[i,j]).dataobj
             else:
-                print("sub: ",i, " ses: ", j, " no file")
+                print("sub: ",i+1, " ses: ", j+1, " no file")
                 concat_image[:,:,:,i,j]=np.nan
 
     return concat_image
