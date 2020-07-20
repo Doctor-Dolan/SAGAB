@@ -8,14 +8,16 @@ import os
 from configparser import ConfigParser
 parser = ConfigParser()
 
+parser.read('config.ini')
 parser.read('./../config.ini')
 
-Base_path = parser.get('base_vars','Base_Path')
+Basic_maps_path = parser.get('base_vars','Basic_maps_path')
+Advanced_maps_path = parser.get('base_vars','Advanced_maps_path')
 ROIs_path = parser.get('base_vars','ROIs_path')
 Caudate_ROIs_path = parser.get('base_vars','Caudate_ROIs_path')
 data_path = parser.get('base_vars','data_path')
-num_subjects = float(parser.get('base_vars','num_subjects'))
-num_sessions = float(parser.get('base_vars','num_sessions'))
+num_subjects = int(parser.get('base_vars','num_subjects'))
+num_sessions = int(parser.get('base_vars','num_sessions'))
 
 
 #Generate list of all the ROIs
@@ -34,6 +36,9 @@ Caudate_ROIS = list(filter(lambda k: '.csv' not in k, ROIS))
 
 
 # In[ ]:
+
+sess = ['ses-1', 'ses-2', 'ses-3']
+preprocs = ['Regular', 'GDT']
 
 
 Metrics = [ "Axial" , "Fractional_Anisotropy" , "Radial" , "Trace" ]
@@ -64,7 +69,7 @@ NODDI_dict = { "Orientation_Dispersion" : 'OD' , "Isotropic_Volume_Fraction" : '
 Metrics_dict = {'Metrics' : Metrics, 'Ext_Metrics' : Extracted_Metrics, 'Native' : Native_Metrics, 'B0_Removed' : B0_Removed_Metrics,
              'Jacobians' : Jacobians, 'Ext_Jacobians' : Extracted_Jacobians, 'Advanced' : Advanced_Metrics, 'DKI': DKI_Metrics,
              'DKI_Thresh' : DKI_Thresh_Metrics, 'MAPMRI' : MAPMRI_Metrics, 'NODDI' : NODDI_Metrics}
-Label_Metrics_Dict = {**Label_Metrics_dict, **Extracted_Metrics_dict, **Native_Metrics_dict, **B0_Removed_Metrics_dict, **Jacobians_Metrics_dict,
+Label_Metrics_Dict = {**Basic_Metrics_dict, **Extracted_Metrics_dict, **Native_Metrics_dict, **B0_Removed_Metrics_dict, **Jacobians_Metrics_dict,
                      **DKI_dict, **DKI_Thresh_dict, **MAPMRI_dict, **NODDI_dict}
 Advanced_Metrics_Dict = {**DKI_Thresh_dict, **MAPMRI_dict, **NODDI_dict}
 
