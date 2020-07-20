@@ -6,7 +6,7 @@
 
 import numpy as np
 import pandas as pd
-import nipy
+import nibabel as nib
 
 
 def mask_data(data):
@@ -46,7 +46,7 @@ def load_whole_cohort(file_locations):
             print("session: ", j+1)
 
             if os.path.isfile(file_locations[i,j]):
-                concat_image[:,:,:,i,j]=nipy.load_image(file_locations[i,j]).get_data()
+                concat_image[:,:,:,i,j]=nib.load(file_locations[i,j]).dataobj
             else:
                 print("sub: ",i, " ses: ", j, " no file")
                 concat_image[:,:,:,i,j]=np.nan
