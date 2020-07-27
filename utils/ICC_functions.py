@@ -43,14 +43,14 @@ def load_whole_cohort(file_locations):
     for i in range(0,num_subjects):
         for j in range(0,num_sessions):
 
-            print("subject: ", i+1)
-            print("session: ", j+1)
+            #print("subject: ", i+1)
+            #print("session: ", j+1)
 
             #Equivalence check tests for nan and is safe on string
             if file_locations[i,j] == file_locations[i,j] and os.path.isfile(file_locations[i,j]):
                 concat_image[:,:,:,i,j]=nib.load(file_locations[i,j]).dataobj
             else:
-                print("sub: ",i+1, " ses: ", j+1, " no file")
+                #print("sub: ",i+1, " ses: ", j+1, " no file")
                 concat_image[:,:,:,i,j]=np.nan
 
     return concat_image

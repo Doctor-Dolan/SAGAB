@@ -19,6 +19,11 @@ data_path = parser.get('base_vars','data_path')
 num_subjects = int(parser.get('base_vars','num_subjects'))
 num_sessions = int(parser.get('base_vars','num_sessions'))
 
+Template = parser.get('base_vars','Template')
+Template_Mask = parser.get('base_vars','Template_Mask')
+Template_FA = parser.get('base_vars','Template_FA')
+Voxelwise_maps_path = parser.get('base_vars','Voxelwise_maps_path')
+
 
 #Generate list of all the ROIs
 ROIS = [f for f in os.listdir(path=ROIs_path) if os.path.isfile(os.path.join(ROIs_path,f))]
