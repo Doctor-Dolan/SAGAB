@@ -14,6 +14,7 @@ parser.read('./../config.ini')
 Basic_maps_path = parser.get('base_vars','Basic_maps_path')
 Advanced_maps_path = parser.get('base_vars','Advanced_maps_path')
 ROIs_path = parser.get('base_vars','ROIs_path')
+Pedro_ROIs_path = parser.get('base_vars','Pedro_ROIs_path')
 Caudate_ROIs_path = parser.get('base_vars','Caudate_ROIs_path')
 data_path = parser.get('base_vars','data_path')
 num_subjects = int(parser.get('base_vars','num_subjects'))
@@ -27,6 +28,11 @@ Voxelwise_maps_path = parser.get('base_vars','Voxelwise_maps_path')
 
 #Generate list of all the ROIs
 ROIS = [f for f in os.listdir(path=ROIs_path) if os.path.isfile(os.path.join(ROIs_path,f))]
+Pedro_ROIS = [f for f in os.listdir(path=Pedro_ROIs_path) if os.path.isfile(os.path.join(Pedro_ROIs_path,f))]
+
+Pedro_ROIS = list(filter(lambda k: 'DS' not in k, Pedro_ROIS))
+Pedro_ROIS = list(filter(lambda k: '.afp' not in k, Pedro_ROIS))
+Pedro_ROIS = list(filter(lambda k: '.csv' not in k, Pedro_ROIS))
 
 ROIS = list(filter(lambda k: 'DS' not in k, ROIS))
 ROIS = list(filter(lambda k: '.afp' not in k, ROIS))
